@@ -71,14 +71,20 @@ struct list *list_edit(struct list **head_p, struct list *end);
 // Bytecode (bc.c)
 
 enum error {
-	ErrSuccess,
-	ErrFailure,
-	ErrAllocate
+	Success,
+	Failure,
+	ErrAllocate,
+	ErrTypeMismatch
 };
 
 struct retval {
 	enum error err;
-	struct data value;
+	struct list *stack;
 };
+
+#define Retval(e, s) \
+	((struct retval){.err = e, .stack = s})
+
+struct retval bc_match_char(struct data value, struct list *stack);
 
 #endif
