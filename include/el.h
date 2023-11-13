@@ -68,4 +68,17 @@ struct list {
 struct list *list_push(struct list *cdr, struct data car);
 struct list *list_edit(struct list **head_p, struct list *end);
 
+// Bytecode (bc.c)
+
+enum error {
+	ErrSuccess,
+	ErrFailure,
+	ErrAllocate
+};
+
+struct retval {
+	enum error err;
+	struct data value;
+};
+
 #endif
